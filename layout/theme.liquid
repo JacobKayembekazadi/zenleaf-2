@@ -58,27 +58,7 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {%- comment -%} Using Tailwind CDN for immediate styling - replace with compiled CSS after upload {%- endcomment -%}
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-      tailwind.config = {
-        theme: {
-          extend: {
-            colors: {
-              'zen-green': '#9BB7A7',
-              'zen-dark': '#2F3E34',
-              'zen-beige': '#F6F3EE',
-              'zen-tan': '#E9E4D8',
-              'zen-brown': '#C7A27C',
-            },
-          },
-        },
-      }
-    </script>
-    {%- comment -%} Uncomment below and remove CDN script above after uploading compiled tailwind.css {%- endcomment -%}
-    {%- comment -%}
     {{ 'tailwind.css' | asset_url | stylesheet_tag }}
-    {%- endcomment -%}
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
   </head>
@@ -128,9 +108,6 @@
       }
     </script>
 
-    {%- if settings.predictive_search_enabled -%}
-      <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
-    {%- endif -%}
   </body>
 </html>
 

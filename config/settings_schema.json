@@ -74,16 +74,6 @@
         "default": "notification",
         "label": "Cart type"
       },
-      {
-        "type": "header",
-        "content": "Search"
-      },
-      {
-        "type": "checkbox",
-        "id": "predictive_search_enabled",
-        "default": true,
-        "label": "Enable predictive search"
-      }
     ]
   }
 ]
