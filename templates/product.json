@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "header": {
+      "type": "header",
+      "settings": {}
+    },
     "main": {
       "type": "main-product",
       "blocks": {

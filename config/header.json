@@ -1,10 +1,12 @@
 {
-  "name": "header",
   "type": "header",
+  "name": "header",
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": "main-menu"
+      }
     }
   }
 }

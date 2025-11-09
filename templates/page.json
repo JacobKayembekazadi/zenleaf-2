@@ -9,13 +9,23 @@
  */
 {
   "sections": {
+    "header": {
+      "type": "header",
+      "settings": {}
+    },
     "main": {
       "type": "main-page",
+      "settings": {}
+    },
+    "footer": {
+      "type": "footer",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "header",
+    "main",
+    "footer"
   ]
 }
 

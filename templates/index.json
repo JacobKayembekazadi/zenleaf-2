@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "header": {
+      "type": "header",
+      "settings": {}
+    },
     "hero": {
       "type": "hero",
       "settings": {
@@ -68,15 +72,21 @@
         "placeholder": "you@calm.com",
         "button_text": "Subscribe"
       }
+    },
+    "footer": {
+      "type": "footer",
+      "settings": {}
     }
   },
   "order": [
+    "header",
     "hero",
     "product_tiers",
     "how_it_works",
     "farm_spotlight",
     "rituals_teaser",
     "reviews",
-    "newsletter"
+    "newsletter",
+    "footer"
   ]
 }
