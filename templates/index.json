@@ -11,7 +11,9 @@
   "sections": {
     "header": {
       "type": "header",
-      "settings": {}
+      "settings": {
+        "menu": "main-menu"
+      }
     },
     "hero": {
       "type": "hero",
@@ -75,7 +77,57 @@
     },
     "footer": {
       "type": "footer",
-      "settings": {}
+      "settings": {
+        "description": "Curated small‑farm teas and mindful rituals delivered monthly."
+      }
+    },
+    "signature_hero_editorial_k6PQzw": {
+      "type": "signature-hero-editorial",
+      "blocks": {
+        "image_tile_yjEGJQ": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/women_pre_workout_2_b79cebc7-95f8-4c9c-8fd3-dcbf994cd49e.png",
+            "overlay_text": "creatine"
+          }
+        },
+        "image_tile_PryYLP": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/women_pre_workout_8d2209a6-c58c-4490-a1dc-ac83737bc2e1.png",
+            "overlay_text": ""
+          }
+        },
+        "image_tile_EXr7JN": {
+          "type": "image_tile",
+          "settings": {
+            "image": "shopify://shop_images/WOMEN_PRE_WORKOUT_4.png",
+            "overlay_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "image_tile_yjEGJQ",
+        "image_tile_PryYLP",
+        "image_tile_EXr7JN"
+      ],
+      "name": "Editorial Hero",
+      "settings": {
+        "section_height": 85,
+        "subheadline": "New Collection",
+        "headline": "Make calm a ritual.",
+        "body_text": "<p>Curated small-farm teas, handcrafted accessories, and a pocket mindfulness guide—delivered monthly.</p>",
+        "primary_cta_text": "Shop The Collection",
+        "primary_cta_link": "",
+        "secondary_cta_text": "Watch Our Story",
+        "secondary_cta_link": "",
+        "background_video": "",
+        "video_poster": "shopify://shop_images/women_pre_workout_2_b79cebc7-95f8-4c9c-8fd3-dcbf994cd49e.png",
+        "video_opacity": 40,
+        "enable_animations": true,
+        "enable_scroll_reveal": false,
+        "enable_parallax": false
+      }
     }
   },
   "order": [
@@ -87,6 +139,7 @@
     "rituals_teaser",
     "reviews",
     "newsletter",
+    "signature_hero_editorial_k6PQzw",
     "footer"
   ]
 }
