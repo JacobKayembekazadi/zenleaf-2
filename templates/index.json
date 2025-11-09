@@ -1,25 +1,73 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "hero": {
-      "type": "hero"
+      "type": "hero",
+      "settings": {
+        "heading": "Make calm a ritual.",
+        "description": "Curated small-farm teas, handcrafted accessories, and a pocket mindfulness guide—delivered monthly.",
+        "cta_text": "Shop The Tranquility Kit",
+        "cta_link": "",
+        "secondary_cta_text": "Take the 2‑min Quiz",
+        "secondary_cta_link": ""
+      }
     },
     "product_tiers": {
-      "type": "product-tiers"
+      "type": "product-tiers",
+      "settings": {
+        "heading": "Choose your calm",
+        "description": "Flexible subscriptions. Gift-ready packaging. Pause or skip anytime.",
+        "collection": "pieces-collection"
+      }
     },
     "how_it_works": {
-      "type": "how-it-works"
+      "type": "how-it-works",
+      "settings": {
+        "heading": "How the ritual works"
+      }
     },
     "farm_spotlight": {
-      "type": "farm-spotlight"
+      "type": "farm-spotlight",
+      "settings": {
+        "heading": "From small, sustainable farms",
+        "description": "We source from independent growers who prioritize soil health, biodiversity, and craft. Each box features traceable origins, tasting notes, and the people behind the leaves.",
+        "link": "",
+        "link_text": "Explore farm stories"
+      }
     },
     "rituals_teaser": {
-      "type": "rituals-teaser"
+      "type": "rituals-teaser",
+      "settings": {
+        "heading": "Tea & Breath — a 7‑day mini series",
+        "description": "Short, guided practices to anchor your day. Choose Morning Focus, Afternoon Reset, or Evening Unwind and follow along with gentle audio prompts.",
+        "primary_link": "",
+        "primary_text": "Browse rituals",
+        "secondary_link": "",
+        "secondary_text": "Play a sample"
+      }
     },
     "reviews": {
-      "type": "reviews"
+      "type": "reviews",
+      "settings": {
+        "heading": "What our members say"
+      }
     },
     "newsletter": {
-      "type": "newsletter"
+      "type": "newsletter",
+      "settings": {
+        "heading": "A quieter inbox",
+        "description": "Ritual tips, farm notes, and limited drops—just a few times a month.",
+        "placeholder": "you@calm.com",
+        "button_text": "Subscribe"
+      }
     }
   },
   "order": [
@@ -32,4 +80,3 @@
     "newsletter"
   ]
 }
-
