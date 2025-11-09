@@ -1,0 +1,56 @@
+<section id="quiz" aria-labelledby="quiz-title" class="py-20 bg-white">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 id="quiz-title" class="font-serif text-3xl sm:text-4xl tracking-tight">
+        {{ section.settings.heading | default: "Find Your Perfect Tea Match" }}
+      </h2>
+      <p class="mt-3 text-[#2B2B2B]/70 max-w-2xl mx-auto">
+        {{ section.settings.description | default: "Take our 2-minute quiz to discover which subscription tier matches your taste and lifestyle." }}
+      </p>
+      {%- if section.settings.cta_link != blank -%}
+        <div class="mt-8">
+          <a href="{{ section.settings.cta_link }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-6 py-3 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+            {{ section.settings.cta_text | default: "Start Quiz" }}
+          </a>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Quiz Section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Find Your Perfect Tea Match"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Take our 2-minute quiz to discover which subscription tier matches your taste and lifestyle."
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "CTA Link"
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "CTA Text",
+      "default": "Start Quiz"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Quiz Section"
+    }
+  ]
+}
+{% endschema %}
+

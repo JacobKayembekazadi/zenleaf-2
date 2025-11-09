@@ -27,8 +27,27 @@
         <h3 class="text-sm font-semibold">{{ block.settings.title }}</h3>
         <ul class="mt-3 space-y-2 text-sm">
           {%- for link in block.settings.menu.links -%}
+            {%- liquid
+              assign link_url = link.url
+              if template.name == 'index' and link.url contains '#'
+                assign link_url = link.url
+              elsif template.name == 'index'
+                case link.title
+                  when 'The Tranquility Kit'
+                    assign link_url = '#tiers'
+                  when 'Ritual Library'
+                    assign link_url = '#rituals'
+                  when 'Farm Stories'
+                    assign link_url = '#farms'
+                  when 'About'
+                    assign link_url = '#about'
+                  else
+                    assign link_url = link.url
+                endcase
+              endif
+            -%}
             <li>
-              <a class="hover:text-[#2F3E34]" href="{{ link.url }}">
+              <a class="hover:text-[#2F3E34]" href="{{ link_url }}">
                 {{ link.title }}
               </a>
             </li>

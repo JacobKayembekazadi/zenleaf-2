@@ -45,7 +45,8 @@ window.cart.addItem = async function(variantId, quantity = 1) {
 // Handle form submissions for add to cart
 document.addEventListener('submit', async function(e) {
   const form = e.target;
-  if (form.action && form.action.includes('cart/add')) {
+  // Only intercept cart add forms, not regular navigation forms
+  if (form.action && form.action.includes('cart/add') && form.method === 'post') {
     e.preventDefault();
     
     const formData = new FormData(form);

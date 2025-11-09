@@ -35,7 +35,31 @@
       {%- comment -%} Desktop nav {%- endcomment -%}
       <nav aria-label="Primary" class="hidden md:flex items-center gap-8">
         {%- for link in section.settings.menu.links -%}
-          <a href="{{ link.url }}" class="text-sm hover:text-[#2F3E34] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7] rounded">
+          {%- liquid
+            assign link_url = link.url
+            if template.name == 'index' and link.url contains '#'
+              assign link_url = link.url
+            elsif template.name == 'index'
+              comment
+                Map common menu titles to anchor links on homepage
+              endcomment
+              case link.title
+                when 'Shop'
+                  assign link_url = '#tiers'
+                when 'Quiz'
+                  assign link_url = '#quiz'
+                when 'Rituals'
+                  assign link_url = '#rituals'
+                when 'Farm Stories'
+                  assign link_url = '#farms'
+                when 'About'
+                  assign link_url = '#about'
+                else
+                  assign link_url = link.url
+              endcase
+            endif
+          -%}
+          <a href="{{ link_url }}" class="nav-link text-sm hover:text-[#2F3E34] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7] rounded">
             {{ link.title }}
           </a>
         {%- endfor -%}
@@ -71,7 +95,28 @@
   <div id="mobile-nav" class="border-t border-black/5 md:hidden hidden">
     <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 grid gap-2">
       {%- for link in section.settings.menu.links -%}
-        <a href="{{ link.url }}" class="mobile-nav-link rounded px-2 py-2 hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]">
+        {%- liquid
+          assign link_url = link.url
+          if template.name == 'index' and link.url contains '#'
+            assign link_url = link.url
+          elsif template.name == 'index'
+            case link.title
+              when 'Shop'
+                assign link_url = '#tiers'
+              when 'Quiz'
+                assign link_url = '#quiz'
+              when 'Rituals'
+                assign link_url = '#rituals'
+              when 'Farm Stories'
+                assign link_url = '#farms'
+              when 'About'
+                assign link_url = '#about'
+              else
+                assign link_url = link.url
+            endcase
+          endif
+        -%}
+        <a href="{{ link_url }}" class="mobile-nav-link nav-link rounded px-2 py-2 hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]">
           {{ link.title }}
         </a>
       {%- endfor -%}
@@ -109,6 +154,34 @@
         if (menuOpen && menuClose) {
           menuOpen.style.display = 'none';
           menuClose.style.display = 'block';
+        }
+      });
+    });
+
+    // Smooth scroll for anchor links
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function(e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && href.length > 1) {
+          const targetId = href.substring(1);
+          const targetElement = document.getElementById(targetId);
+          
+          if (targetElement) {
+            e.preventDefault();
+            const headerOffset = 80; // Account for sticky header
+            const elementPosition = targetElement.getBoundingClientRect().top;
+            const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
+
+            window.scrollTo({
+              top: offsetPosition,
+              behavior: 'smooth'
+            });
+
+            // Update URL without jumping
+            if (history.pushState) {
+              history.pushState(null, null, href);
+            }
+          }
         }
       });
     });
