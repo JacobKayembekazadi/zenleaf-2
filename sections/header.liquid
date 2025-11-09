@@ -1,0 +1,138 @@
+{%- liquid
+  assign country_selector = false
+  assign language_selector = false
+
+  if localization.available_countries.size > 1 and localization.available_languages.size > 1
+    assign country_selector = true
+    assign language_selector = true
+  elsif localization.available_countries.size > 1
+    assign country_selector = true
+  elsif localization.available_languages.size > 1
+    assign language_selector = true
+  endif
+-%}
+
+<header class="sticky top-0 z-50 bg-white/80 backdrop-blur supports-[backdrop-filter]:bg-white/60 border-b border-black/5">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="flex h-16 items-center justify-between">
+      <a href="{{ routes.root_url }}" class="flex items-center gap-3 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7] rounded">
+        {%- if section.settings.logo != blank -%}
+          <img
+            src="{{ section.settings.logo | image_url: width: 32 }}"
+            alt="{{ shop.name }}"
+            width="32"
+            height="32"
+            loading="lazy"
+          >
+        {%- else -%}
+          <span class="inline-flex h-8 w-8 items-center justify-center rounded-md bg-[#9BB7A7] text-[#2F3E34]">
+            {% render 'icon-leaf' %}
+          </span>
+        {%- endif -%}
+        <span class="font-serif text-xl tracking-tight">{{ shop.name }}</span>
+      </a>
+
+      {%- comment -%} Desktop nav {%- endcomment -%}
+      <nav aria-label="Primary" class="hidden md:flex items-center gap-8">
+        {%- for link in section.settings.menu.links -%}
+          <a href="{{ link.url }}" class="text-sm hover:text-[#2F3E34] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7] rounded">
+            {{ link.title }}
+          </a>
+        {%- endfor -%}
+        <a href="{{ routes.collections_url }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-4 py-2 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+          Shop The Tranquility Kit
+        </a>
+        <a href="{{ routes.cart_url }}" class="relative inline-flex items-center p-2 text-[#2B2B2B] hover:text-[#2F3E34] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7] rounded">
+          <span class="sr-only">Cart</span>
+          {% render 'icon-cart' %}
+          {%- if cart.item_count > 0 -%}
+            <span class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#9BB7A7] text-xs font-medium text-[#2F3E34]">
+              {{ cart.item_count }}
+            </span>
+          {%- endif -%}
+        </a>
+      </nav>
+
+      {%- comment -%} Mobile trigger {%- endcomment -%}
+      <button
+        class="md:hidden inline-flex items-center justify-center rounded-md p-2 text-[#2B2B2B] hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+        aria-controls="mobile-nav"
+        aria-expanded="false"
+        id="mobile-menu-toggle"
+      >
+        <span class="sr-only">Toggle menu</span>
+        <svg class="h-6 w-6 mobile-menu-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8">
+          <path class="menu-open" d="M6 18L18 6M6 6l12 12" style="display: none;" />
+          <path class="menu-close" d="M3 6h18M3 12h18M3 18h18" />
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  {%- comment -%} Mobile nav {%- endcomment -%}
+  <div id="mobile-nav" class="border-t border-black/5 md:hidden hidden">
+    <nav class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-3 grid gap-2">
+      {%- for link in section.settings.menu.links -%}
+        <a href="{{ link.url }}" class="mobile-nav-link rounded px-2 py-2 hover:bg-black/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]">
+          {{ link.title }}
+        </a>
+      {%- endfor -%}
+      <a href="{{ routes.collections_url }}" class="inline-flex items-center justify-center rounded-md bg-[#9BB7A7] px-4 py-2 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] mobile-nav-link">
+        Shop The Tranquility Kit
+      </a>
+      <a href="{{ routes.cart_url }}" class="inline-flex items-center justify-center rounded-md border border-[#2F3E34] px-4 py-2 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5 mobile-nav-link">
+        Cart ({{ cart.item_count }})
+      </a>
+    </nav>
+  </div>
+</header>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggle = document.getElementById('mobile-menu-toggle');
+    const nav = document.getElementById('mobile-nav');
+    const menuOpen = toggle?.querySelector('.menu-open');
+    const menuClose = toggle?.querySelector('.menu-close');
+
+    toggle?.addEventListener('click', function() {
+      const isOpen = !nav.classList.contains('hidden');
+      nav.classList.toggle('hidden');
+      toggle.setAttribute('aria-expanded', !isOpen);
+      if (menuOpen && menuClose) {
+        menuOpen.style.display = !isOpen ? 'block' : 'none';
+        menuClose.style.display = !isOpen ? 'none' : 'block';
+      }
+    });
+
+    document.querySelectorAll('.mobile-nav-link').forEach(link => {
+      link.addEventListener('click', function() {
+        nav.classList.add('hidden');
+        toggle?.setAttribute('aria-expanded', 'false');
+        if (menuOpen && menuClose) {
+          menuOpen.style.display = 'none';
+          menuClose.style.display = 'block';
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Header",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo image"
+    },
+    {
+      "type": "link_list",
+      "id": "menu",
+      "default": "main-menu",
+      "label": "Menu"
+    }
+  ]
+}
+{% endschema %}
+

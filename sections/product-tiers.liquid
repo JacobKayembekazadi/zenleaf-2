@@ -1,0 +1,234 @@
+{%- liquid
+  assign collection = collections[section.settings.collection]
+-%}
+
+<section id="tiers" aria-labelledby="tiers-title" class="py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="text-center">
+      <h2 id="tiers-title" class="font-serif text-3xl sm:text-4xl tracking-tight">
+        {{ section.settings.heading | default: "Choose your calm" }}
+      </h2>
+      <p class="mt-3 text-[#2B2B2B]/70">
+        {{ section.settings.description | default: "Flexible subscriptions. Gift-ready packaging. Pause or skip anytime." }}
+      </p>
+    </div>
+
+    <div class="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {%- if collection != blank and collection.products.size > 0 -%}
+        {%- for product in collection.products limit: 3 -%}
+          {%- assign is_featured = false -%}
+          {%- assign badge_text = blank -%}
+          {%- if forloop.index == 2 -%}
+            {%- assign is_featured = true -%}
+            {%- assign badge_text = "Most Loved" -%}
+          {%- endif -%}
+
+          <article class="relative rounded-xl bg-white ring-1 ring-black/5 p-6 md:p-8 shadow-[0_2px_12px_rgba(47,62,52,0.08)] {% if is_featured %}outline outline-2 outline-[#9BB7A7]{% endif %}">
+            {%- if badge_text != blank -%}
+              <div class="absolute -top-3 left-6 inline-flex items-center rounded-full bg-[#9BB7A7] px-3 py-1 text-xs font-medium text-[#2F3E34] shadow">
+                {{ badge_text }}
+              </div>
+            {%- endif -%}
+
+            <h3 class="font-serif text-2xl tracking-tight">{{ product.title }}</h3>
+            <p class="mt-1 text-sm text-[#2B2B2B]/70">{{ product.description | strip_html | truncatewords: 15 }}</p>
+            
+            <div class="mt-4">
+              {%- if product.price_varies -%}
+                <p class="text-lg font-medium text-[#2F3E34]">
+                  {{ product.price_min | money }}–{{ product.price_max | money }}{% if product.price_min != product.price_max %}/mo{% endif %}
+                </p>
+              {%- else -%}
+                <p class="text-lg font-medium text-[#2F3E34]">{{ product.price | money }}{% if product.tags contains 'subscription' %}/mo{% endif %}</p>
+              {%- endif -%}
+            </div>
+
+            {%- if product.variants.size > 0 -%}
+              <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-6">
+                <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <button
+                  type="submit"
+                  name="add"
+                  class="inline-flex w-full items-center justify-center rounded-md bg-[#2F3E34] px-4 py-2 text-sm font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+                  {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+                >
+                  {%- if product.selected_or_first_available_variant.available -%}
+                    Start {{ product.title }}
+                  {%- else -%}
+                    Sold Out
+                  {%- endif -%}
+                </button>
+              </form>
+            {%- else -%}
+              <a
+                href="{{ product.url }}"
+                class="mt-6 inline-flex w-full items-center justify-center rounded-md bg-[#2F3E34] px-4 py-2 text-sm font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+              >
+                View {{ product.title }}
+              </a>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      {%- else -%}
+        {%- comment -%} Fallback to static tiers if no collection {%- endcomment -%}
+        {%- assign static_tiers = section.blocks -%}
+        {%- for block in static_tiers -%}
+          <article class="relative rounded-xl bg-white ring-1 ring-black/5 p-6 md:p-8 shadow-[0_2px_12px_rgba(47,62,52,0.08)] {% if block.settings.featured %}outline outline-2 outline-[#9BB7A7]{% endif %}">
+            {%- if block.settings.badge != blank -%}
+              <div class="absolute -top-3 left-6 inline-flex items-center rounded-full bg-[#9BB7A7] px-3 py-1 text-xs font-medium text-[#2F3E34] shadow">
+                {{ block.settings.badge }}
+              </div>
+            {%- endif -%}
+
+            <h3 class="font-serif text-2xl tracking-tight">{{ block.settings.name }}</h3>
+            <p class="mt-1 text-sm text-[#2B2B2B]/70">{{ block.settings.description }}</p>
+            <p class="mt-4 text-lg font-medium text-[#2F3E34]">{{ block.settings.price }}</p>
+
+            {%- if block.settings.product != blank -%}
+              {%- assign tier_product = all_products[block.settings.product] -%}
+              {%- if tier_product != blank -%}
+                <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-6">
+                  <input type="hidden" name="id" value="{{ tier_product.selected_or_first_available_variant.id }}">
+                  <button
+                    type="submit"
+                    name="add"
+                    class="inline-flex w-full items-center justify-center rounded-md bg-[#2F3E34] px-4 py-2 text-sm font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+                    {% unless tier_product.selected_or_first_available_variant.available %}disabled{% endunless %}
+                  >
+                    {%- if tier_product.selected_or_first_available_variant.available -%}
+                      Start {{ block.settings.name }}
+                    {%- else -%}
+                      Sold Out
+                    {%- endif -%}
+                  </button>
+                </form>
+              {%- else -%}
+                <a
+                  href="{{ block.settings.link | default: routes.collections_url }}"
+                  class="mt-6 inline-flex w-full items-center justify-center rounded-md bg-[#2F3E34] px-4 py-2 text-sm font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+                >
+                  Start {{ block.settings.name }}
+                </a>
+              {%- endif -%}
+            {%- else -%}
+              <a
+                href="{{ block.settings.link | default: routes.collections_url }}"
+                class="mt-6 inline-flex w-full items-center justify-center rounded-md bg-[#2F3E34] px-4 py-2 text-sm font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+              >
+                Start {{ block.settings.name }}
+              </a>
+            {%- endif -%}
+          </article>
+        {%- endfor -%}
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product Tiers",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Choose your calm"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Flexible subscriptions. Gift-ready packaging. Pause or skip anytime."
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Collection",
+      "info": "Select a collection to display products. If empty, uses blocks below."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "tier",
+      "name": "Tier",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Tier name",
+          "default": "Essentials"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "Description",
+          "default": "2 teas + pocket mindfulness guide"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price",
+          "default": "$29–$35/mo"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        },
+        {
+          "type": "checkbox",
+          "id": "featured",
+          "label": "Featured tier",
+          "default": false
+        },
+        {
+          "type": "text",
+          "id": "badge",
+          "label": "Badge text",
+          "default": "Most Loved"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Tiers",
+      "blocks": [
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Essentials",
+            "description": "2 teas + pocket mindfulness guide",
+            "price": "$29–$35/mo"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Classic",
+            "description": "3 teas + guide + accessory",
+            "price": "$45–$55/mo",
+            "featured": true,
+            "badge": "Most Loved"
+          }
+        },
+        {
+          "type": "tier",
+          "settings": {
+            "name": "Reserve",
+            "description": "Rare single-origin + artisan accessory",
+            "price": "$69–$85/mo"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

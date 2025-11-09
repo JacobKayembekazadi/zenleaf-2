@@ -1,0 +1,109 @@
+<section aria-labelledby="how-title" class="py-16 bg-white">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2 id="how-title" class="text-center font-serif text-3xl tracking-tight">
+      {{ section.settings.heading | default: "How the ritual works" }}
+    </h2>
+    <div class="mt-10 grid gap-8 sm:grid-cols-3">
+      {%- for block in section.blocks -%}
+        <div class="rounded-xl bg-[#F6F3EE] p-6 ring-1 ring-black/5">
+          {%- case block.settings.icon -%}
+            {%- when 'leaf' -%}
+              {% render 'icon-leaf', class: 'h-7 w-7 text-[#2F3E34]' %}
+            {%- when 'cup' -%}
+              {% render 'icon-cup', class: 'h-7 w-7 text-[#2F3E34]' %}
+            {%- when 'gift' -%}
+              {% render 'icon-gift', class: 'h-7 w-7 text-[#2F3E34]' %}
+          {%- endcase -%}
+          <h3 class="mt-4 font-medium text-lg">{{ block.settings.title }}</h3>
+          <p class="mt-1 text-[#2B2B2B]/70">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "How It Works",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "How the ritual works"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "step",
+      "name": "Step",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Curated by craft"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "Description",
+          "default": "Small-batch teas from partner farms."
+        },
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "Icon",
+          "options": [
+            {
+              "value": "leaf",
+              "label": "Leaf"
+            },
+            {
+              "value": "cup",
+              "label": "Cup"
+            },
+            {
+              "value": "gift",
+              "label": "Gift"
+            }
+          ],
+          "default": "leaf"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "How It Works",
+      "blocks": [
+        {
+          "type": "step",
+          "settings": {
+            "title": "Curated by craft",
+            "text": "Small-batch teas from partner farms.",
+            "icon": "leaf"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Ritual made simple",
+            "text": "5-minute guide in every box.",
+            "icon": "cup"
+          }
+        },
+        {
+          "type": "step",
+          "settings": {
+            "title": "Delivered monthly",
+            "text": "Pause or skip anytime.",
+            "icon": "gift"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

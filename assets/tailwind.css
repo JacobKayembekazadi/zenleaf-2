@@ -1,0 +1,16 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-[#F6F3EE] text-[#2B2B2B];
+  }
+  .selection\:bg-\[#9BB7A7\]\/30 ::selection {
+    background-color: rgba(155, 183, 167, 0.3);
+  }
+}
+

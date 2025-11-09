@@ -1,0 +1,43 @@
+{
+  "sections": {
+    "header": {
+      "type": "header"
+    },
+    "hero": {
+      "type": "hero"
+    },
+    "product_tiers": {
+      "type": "product-tiers"
+    },
+    "how_it_works": {
+      "type": "how-it-works"
+    },
+    "farm_spotlight": {
+      "type": "farm-spotlight"
+    },
+    "rituals_teaser": {
+      "type": "rituals-teaser"
+    },
+    "reviews": {
+      "type": "reviews"
+    },
+    "newsletter": {
+      "type": "newsletter"
+    },
+    "footer": {
+      "type": "footer"
+    }
+  },
+  "order": [
+    "header",
+    "hero",
+    "product_tiers",
+    "how_it_works",
+    "farm_spotlight",
+    "rituals_teaser",
+    "reviews",
+    "newsletter",
+    "footer"
+  ]
+}
+

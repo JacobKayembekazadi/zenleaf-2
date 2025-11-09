@@ -1,172 +1,91 @@
-# ZenLeaf – Tea & Mindful Rituals Landing Page
+# ZenLeaf Shopify Theme
 
-A beautiful, accessible, and fully responsive landing page for ZenLeaf, a tea subscription service focused on mindfulness and craft.
+A beautiful, modern Shopify theme converted from a React landing page. This theme maintains the original design aesthetic with Tailwind CSS styling and full Shopify e-commerce functionality.
 
-## ✨ Features
+## Features
 
-- 🎨 **Modern Design**: Clean, calming aesthetic with custom color palette
-- 📱 **Fully Responsive**: Mobile-first design with sticky header and collapsible navigation
-- ♿ **Accessible**: Semantic HTML, ARIA labels, focus states, and screen reader support
-- 🚀 **Performance**: Built with React + Vite for lightning-fast development
-- 🎯 **Tailwind CSS**: Utility-first styling with no external UI libraries
-- 💚 **Zero Dependencies**: Pure React + Tailwind (besides core React libs)
+- **Responsive Design**: Mobile-first approach with Tailwind CSS
+- **Product Integration**: Full Shopify product and cart functionality
+- **Customizable Sections**: All sections are editable through Shopify theme customizer
+- **Newsletter Integration**: Built-in Shopify customer form integration
+- **Accessible**: Semantic HTML and ARIA labels throughout
+- **Performance**: Optimized images and minimal JavaScript
 
-## 🚀 Getting Started
-
-### Prerequisites
-
-- Node.js 16+ installed
-- npm or yarn package manager
-
-### Installation & Development
-
-1. **Install dependencies:**
-   ```bash
-   npm install
-   ```
-
-2. **Start the development server:**
-   ```bash
-   npm run dev
-   ```
-
-3. **Open your browser:**
-   Navigate to `http://localhost:5173` (or the port shown in your terminal)
-
-### Build for Production
-
-```bash
-npm run build
-```
-
-The optimized production build will be in the `dist/` folder.
-
-### Preview Production Build
-
-```bash
-npm run preview
-```
-
-## 📂 Project Structure
+## Theme Structure
 
 ```
-zenleaf-website/
-├── public/
-│   ├── images/                # 🖼️ Place your images here
-│   ├── videos/                # 🎬 Place your videos here
-│   └── README.md              # Assets usage guide
-├── src/
-│   ├── components/
-│   │   └── Layout.jsx         # Shared header/footer layout
-│   ├── pages/
-│   │   ├── Home.jsx           # Landing page
-│   │   ├── Shop.jsx           # Product catalog & subscriptions
-│   │   ├── Quiz.jsx           # Interactive recommendation quiz
-│   │   ├── Rituals.jsx        # Mindfulness guides library
-│   │   ├── FarmStories.jsx    # Farm profiles & stories
-│   │   └── About.jsx          # Company information
-│   ├── App.jsx                # Router configuration
-│   ├── main.jsx               # React entry point
-│   └── index.css              # Tailwind imports
-├── index.html                 # HTML template
-├── tailwind.config.js         # Tailwind configuration
-├── postcss.config.js          # PostCSS configuration
-├── vite.config.js             # Vite configuration
-└── package.json               # Dependencies
+.
+├── assets/          # CSS, JavaScript, and other assets
+├── config/          # Theme configuration
+├── layout/          # Theme layout files
+├── locales/         # Translation files
+├── sections/        # Reusable theme sections
+├── snippets/        # Reusable code snippets
+└── templates/       # Page templates
+
 ```
 
-## 🎨 Customization
+## Sections
 
-### Add Your Own Images & Videos
+- **Header**: Sticky navigation with mobile menu
+- **Hero**: Hero section with CTA buttons
+- **Product Tiers**: Display subscription tiers/products
+- **How It Works**: Three-step process explanation
+- **Farm Spotlight**: Feature section with image
+- **Rituals Teaser**: Content section with CTA
+- **Reviews**: Customer testimonials
+- **Newsletter**: Email subscription form
+- **Footer**: Site footer with links
 
-1. **Place your assets in the `public/` folder:**
-   - Images → `public/images/` (e.g., `hero-tea.jpg`, `farm-landscape.jpg`)
-   - Videos → `public/videos/` (e.g., `brewing-guide.mp4`)
+## Setup Instructions
 
-2. **Replace placeholder images in `src/ZenLeafLanding.jsx`:**
+1. **Install Theme**:
+   - Zip the entire theme directory
+   - Upload to Shopify Admin → Online Store → Themes → Add theme → Upload zip file
 
-   The component currently uses Unsplash placeholders. Replace them with your own:
+2. **Configure Settings**:
+   - Go to Theme Customizer
+   - Configure logo, colors, fonts, and other settings
+   - Set up navigation menus
 
-   ```jsx
-   // Hero section (line ~181)
-   <img src="/images/hero-tea.jpg" alt="..." />
-   
-   // Farm spotlight (line ~292)
-   <img src="/images/tea-farm.jpg" alt="..." />
-   
-   // Ritual teaser (line ~316)
-   <img src="/images/tea-ritual.jpg" alt="..." />
-   ```
+3. **Create Products**:
+   - Create products for your subscription tiers (Essentials, Classic, Reserve)
+   - Tag products appropriately for filtering
+   - Set up collections if using collection-based product display
 
-3. **Reference assets** using the path `/images/your-file.jpg` or `/videos/your-file.mp4`
+4. **Customize Sections**:
+   - Each section can be customized through the theme editor
+   - Add/remove blocks, update content, and configure settings
 
-   See `public/README.md` for detailed usage examples and optimization tips.
+## Product Setup
 
-### Update Links
+To use the Product Tiers section:
 
-Replace placeholder `href="#"` values with your actual routes/pages.
+1. Create a collection named "Subscription Tiers" (or any name)
+2. Add your three tier products to this collection
+3. In the Product Tiers section settings, select this collection
+4. Alternatively, use the section blocks to manually configure each tier
 
-### Modify Colors
+## Styling
 
-The color palette is defined using Tailwind arbitrary values:
-- Primary Green: `#9BB7A7`
-- Dark Green: `#2F3E34`
-- Warm Beige: `#F6F3EE`
-- Light Beige: `#E9E4D8`
-- Brown Accent: `#C7A27C`
-- Text: `#2B2B2B`
+The theme uses Tailwind CSS. See `SETUP.md` for detailed instructions.
 
-### Add Google Fonts (Optional)
+**Quick Start (Development):**
+- Uncomment the Tailwind CDN script in `layout/theme.liquid` (line 64)
 
-For a custom serif font, add this to `index.html` `<head>`:
+**Production Build:**
+1. Install dependencies: `npm install`
+2. Build CSS: `npm run build:css`
+3. Upload the compiled `assets/tailwind.css` to Shopify
 
-```html
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Lora:wght@400;500;600&display=swap" rel="stylesheet">
-```
+## Browser Support
 
-Then update `tailwind.config.js`:
+- Chrome (latest)
+- Firefox (latest)
+- Safari (latest)
+- Edge (latest)
 
-```js
-fontFamily: {
-  serif: ['Lora', 'Georgia', 'serif'],
-},
-```
+## License
 
-## 📦 What's Included
-
-### Pages
-- ✅ **Home** - Landing page with hero, pricing tiers, reviews, newsletter signup
-- ✅ **Shop** - Product catalog with subscription tiers, add-ons, and gift cards
-- ✅ **Quiz** - Interactive 5-question quiz with personalized recommendations
-- ✅ **Rituals** - Library of mindfulness guides with filtering and modals
-- ✅ **Farm Stories** - Farm profiles, sustainability practices, and sourcing commitment
-- ✅ **About** - Company story, mission, values, timeline, team, and impact stats
-
-### Features
-- ✅ Full routing with React Router
-- ✅ Shared header/footer layout
-- ✅ Sticky navigation with mobile menu
-- ✅ Responsive design (mobile-first)
-- ✅ Interactive components (quiz, modals, filters)
-- ✅ Smooth page transitions
-- ✅ SEO-friendly structure
-
-## 🛠️ Tech Stack
-
-- **React 18** - UI library
-- **React Router 6** - Client-side routing
-- **Vite 5** - Build tool
-- **Tailwind CSS 3** - Styling
-- **PostCSS** - CSS processing
-- **Autoprefixer** - Vendor prefixes
-
-## 📝 License
-
-This project is open source and available for personal and commercial use.
-
----
-
-**Built with ☕ and mindfulness**
+This theme is provided as-is for use with Shopify stores.
 

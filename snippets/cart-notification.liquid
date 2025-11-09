@@ -1,0 +1,152 @@
+{%- if settings.cart_type == 'notification' -%}
+  <cart-notification>
+    <div class="cart-notification-wrapper" aria-hidden="true">
+      <div class="cart-notification" role="dialog" aria-modal="true" aria-labelledby="cart-notification-title">
+        <div class="cart-notification__header">
+          <h2 id="cart-notification-title" class="cart-notification__title">Item added to your cart</h2>
+          <button type="button" class="cart-notification__close" aria-label="Close">
+            <svg aria-hidden="true" focusable="false" viewBox="0 0 14 10" fill="none">
+              <path d="M1 1l6 6m0 0l6 6M7 7l6-6M7 7l-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+          </button>
+        </div>
+        <div class="cart-notification__content">
+          <div class="cart-notification__product"></div>
+          <div class="cart-notification__links">
+            <a href="{{ routes.cart_url }}" class="button button--secondary">View cart</a>
+            <a href="{{ routes.root_url }}" class="button">Continue shopping</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </cart-notification>
+
+  <script>
+    class CartNotification extends HTMLElement {
+      constructor() {
+        super();
+        this.notification = this.querySelector('.cart-notification');
+        this.header = document.querySelector('header');
+        this.closeButton = this.querySelector('.cart-notification__close');
+        
+        this.closeButton?.addEventListener('click', this.close.bind(this));
+        this.addEventListener('keyup', (evt) => evt.code === 'Escape' && this.close());
+        this.addEventListener('click', (evt) => {
+          if (evt.target === this) this.close();
+        });
+      }
+
+      open() {
+        this.setAttribute('aria-hidden', 'false');
+        this.notification?.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('cart-notification-open');
+      }
+
+      close() {
+        this.setAttribute('aria-hidden', 'true');
+        this.notification?.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('cart-notification-open');
+      }
+
+      renderContents(parsedState) {
+        this.querySelector('.cart-notification__product').innerHTML = 
+          this.getProductMarkup(parsedState.items[parsedState.items.length - 1]);
+        this.open();
+      }
+
+      getProductMarkup(item) {
+        return `
+          <div class="cart-notification-product">
+            <img src="${item.image}" alt="${item.product_title}" class="cart-notification-product__image">
+            <div>
+              <h3>${item.product_title}</h3>
+              <p>${item.variant_title || ''}</p>
+              <p>${item.final_line_price}</p>
+            </div>
+          </div>
+        `;
+      }
+    }
+
+    customElements.define('cart-notification', CartNotification);
+  </script>
+
+  <style>
+    .cart-notification-wrapper {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    .cart-notification {
+      background: white;
+      border: 1px solid rgba(0, 0, 0, 0.1);
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+      max-width: 400px;
+      margin: 1rem auto;
+      padding: 1.5rem;
+      pointer-events: all;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+    }
+
+    .cart-notification[aria-hidden="false"] {
+      transform: translateY(0);
+    }
+
+    .cart-notification__header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+    }
+
+    .cart-notification__title {
+      font-size: 1.125rem;
+      font-weight: 600;
+      margin: 0;
+    }
+
+    .cart-notification__close {
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+    }
+
+    .cart-notification-product {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .cart-notification-product__image {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 4px;
+    }
+
+    .cart-notification__links {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .button {
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .button--secondary {
+      background: #2F3E34;
+      color: white;
+    }
+  </style>
+{%- endif -%}
+

@@ -1,13 +1,23 @@
 /** @type {import('tailwindcss').Config} */
-export default {
+module.exports = {
   content: [
-    "./index.html",
-    "./src/**/*.{js,ts,jsx,tsx}",
+    './layout/**/*.liquid',
+    './sections/**/*.liquid',
+    './snippets/**/*.liquid',
+    './templates/**/*.liquid',
+    './templates/**/*.json',
   ],
   theme: {
     extend: {
       fontFamily: {
-        serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+        serif: ['Georgia', 'serif'],
+      },
+      colors: {
+        'zen-green': '#9BB7A7',
+        'zen-dark': '#2F3E34',
+        'zen-beige': '#F6F3EE',
+        'zen-tan': '#E9E4D8',
+        'zen-brown': '#C7A27C',
       },
     },
   },

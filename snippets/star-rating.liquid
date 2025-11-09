@@ -1,0 +1,13 @@
+{%- assign rating = rating | default: 5 -%}
+<div aria-label="{{ rating }} out of 5 stars" class="flex gap-1" role="img">
+  {%- for i in (1..5) -%}
+    <svg
+      viewBox="0 0 24 24"
+      class="h-5 w-5 {% if i <= rating %}fill-[#2F3E34]{% else %}fill-gray-200{% endif %}"
+      aria-hidden="true"
+    >
+      <path d="M12 17.27 18.18 21l-1.64-7.03L22 9.24l-7.19-.61L12 2 9.19 8.63 2 9.24l5.46 4.73L5.82 21z"/>
+    </svg>
+  {%- endfor -%}
+</div>
+

@@ -1,0 +1,80 @@
+<section id="farms" aria-labelledby="farms-title" class="py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 grid lg:grid-cols-2 gap-10 items-center">
+    <div class="relative order-last lg:order-first">
+      <div class="aspect-[4/3] w-full overflow-hidden rounded-xl shadow-[0_8px_28px_rgba(47,62,52,0.12)] ring-1 ring-black/5 bg-white">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 2069 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            class="h-full w-full object-cover"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="lazy"
+          >
+        {%- else -%}
+          <img
+            src="https://images.unsplash.com/photo-1501004318641-b39e6451bec6?q=80&w=2069&auto=format&fit=crop"
+            alt="Tea fields at sunrise with soft mist"
+            class="h-full w-full object-cover"
+            loading="lazy"
+          >
+        {%- endif -%}
+      </div>
+    </div>
+    <div>
+      <h2 id="farms-title" class="font-serif text-3xl tracking-tight">
+        {{ section.settings.heading | default: "From small, sustainable farms" }}
+      </h2>
+      <p class="mt-4 text-[#2B2B2B]/80 max-w-xl">
+        {{ section.settings.description | default: "We source from independent growers who prioritize soil health, biodiversity, and craft. Each box features traceable origins, tasting notes, and the people behind the leaves." }}
+      </p>
+      {%- if section.settings.link != blank -%}
+        <a href="{{ section.settings.link }}" class="mt-6 inline-flex items-center rounded-md border border-[#2F3E34] px-4 py-2 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5">
+          {{ section.settings.link_text | default: "Explore farm stories" }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Farm Spotlight",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "From small, sustainable farms"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "We source from independent growers who prioritize soil health, biodiversity, and craft. Each box features traceable origins, tasting notes, and the people behind the leaves."
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "text",
+      "id": "link_text",
+      "label": "Link text",
+      "default": "Explore farm stories"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Farm Spotlight"
+    }
+  ]
+}
+{% endschema %}
+

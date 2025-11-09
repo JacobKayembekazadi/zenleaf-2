@@ -1,0 +1,100 @@
+<section aria-labelledby="hero-title" class="relative overflow-hidden bg-[#E9E4D8]">
+  <div class="absolute inset-0 pointer-events-none" aria-hidden="true">
+    <div class="absolute -top-10 -left-10 h-56 w-56 rounded-full bg-[#9BB7A7]/20 blur-2xl"></div>
+    <div class="absolute -bottom-16 -right-8 h-72 w-72 rounded-full bg-[#C7A27C]/20 blur-2xl"></div>
+  </div>
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-20 sm:py-28 grid lg:grid-cols-2 gap-10 items-center">
+    <div>
+      <h1 id="hero-title" class="font-serif text-4xl sm:text-5xl lg:text-6xl text-[#2B2B2B] tracking-tight">
+        {{ section.settings.heading | default: "Make calm a ritual." }}
+      </h1>
+      <p class="mt-5 max-w-xl text-lg text-[#2B2B2B]/80">
+        {{ section.settings.description | default: "Curated small-farm teas, handcrafted accessories, and a pocket mindfulness guide—delivered monthly." }}
+      </p>
+      <div class="mt-8 flex flex-wrap gap-3">
+        <a href="{{ section.settings.cta_link | default: routes.collections_url }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-6 py-3 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+          {{ section.settings.cta_text | default: "Shop The Tranquility Kit" }}
+        </a>
+        {%- if section.settings.secondary_cta_link != blank -%}
+          <a href="{{ section.settings.secondary_cta_link }}" class="inline-flex items-center rounded-md border border-[#2F3E34] px-6 py-3 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+            {{ section.settings.secondary_cta_text | default: "Take the 2‑min Quiz" }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+    <div class="relative">
+      <div class="aspect-[4/3] w-full overflow-hidden rounded-xl shadow-[0_8px_28px_rgba(47,62,52,0.12)] ring-1 ring-black/5 bg-white">
+        {%- if section.settings.image != blank -%}
+          <img
+            src="{{ section.settings.image | image_url: width: 1968 }}"
+            alt="{{ section.settings.image.alt | escape }}"
+            class="h-full w-full object-cover"
+            width="{{ section.settings.image.width }}"
+            height="{{ section.settings.image.height }}"
+            loading="eager"
+          >
+        {%- else -%}
+          <img
+            src="https://images.unsplash.com/photo-1513635269975-59663e0ac1ad?q=80&w=1968&auto=format&fit=crop"
+            alt="A calm tea still life with steam, ceramics, and citrus"
+            class="h-full w-full object-cover"
+            loading="eager"
+          >
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Hero",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "Make calm a ritual."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Curated small-farm teas, handcrafted accessories, and a pocket mindfulness guide—delivered monthly."
+    },
+    {
+      "type": "text",
+      "id": "cta_text",
+      "label": "Primary button text",
+      "default": "Shop The Tranquility Kit"
+    },
+    {
+      "type": "url",
+      "id": "cta_link",
+      "label": "Primary button link"
+    },
+    {
+      "type": "text",
+      "id": "secondary_cta_text",
+      "label": "Secondary button text",
+      "default": "Take the 2‑min Quiz"
+    },
+    {
+      "type": "url",
+      "id": "secondary_cta_link",
+      "label": "Secondary button link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Hero image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Hero"
+    }
+  ]
+}
+{% endschema %}
+

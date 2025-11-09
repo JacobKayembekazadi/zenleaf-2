@@ -1,0 +1,64 @@
+<section aria-labelledby="nl-title" class="py-16 bg-white">
+  <div class="mx-auto max-w-3xl px-4 sm:px-6 lg:px-8 text-center">
+    <h2 id="nl-title" class="font-serif text-3xl tracking-tight">
+      {{ section.settings.heading | default: "A quieter inbox" }}
+    </h2>
+    <p class="mt-2 text-[#2B2B2B]/70">
+      {{ section.settings.description | default: "Ritual tips, farm notes, and limited drops—just a few times a month." }}
+    </p>
+    {%- form 'customer', class: 'mt-6 mx-auto max-w-xl grid grid-cols-1 sm:grid-cols-[1fr_auto] gap-3' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <label for="newsletter-email" class="sr-only">Email address</label>
+      <input
+        id="newsletter-email"
+        type="email"
+        name="contact[email]"
+        required
+        placeholder="{{ section.settings.placeholder | default: 'you@calm.com' }}"
+        class="w-full rounded-md border border-black/10 bg-[#F6F3EE] px-4 py-3 text-base placeholder:text-[#2B2B2B]/40 focus:outline-none focus:ring-2 focus:ring-[#9BB7A7]"
+        aria-label="{{ section.settings.placeholder | default: 'you@calm.com' }}"
+      >
+      <button type="submit" class="inline-flex items-center justify-center rounded-md bg-[#2F3E34] px-6 py-3 text-sm font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]">
+        {{ section.settings.button_text | default: "Subscribe" }}
+      </button>
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "A quieter inbox"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description",
+      "default": "Ritual tips, farm notes, and limited drops—just a few times a month."
+    },
+    {
+      "type": "text",
+      "id": "placeholder",
+      "label": "Email placeholder",
+      "default": "you@calm.com"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button text",
+      "default": "Subscribe"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Newsletter"
+    }
+  ]
+}
+{% endschema %}
+

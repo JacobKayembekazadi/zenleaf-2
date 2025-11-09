@@ -1,0 +1,64 @@
+{
+  "general": {
+    "meta": {
+      "tags": "Tags: {{ tags }}",
+      "page": "Page {{ page }}"
+    },
+    "404": {
+      "title": "404 Page Not Found",
+      "subtext": "The page you were looking for does not exist."
+    },
+    "pagination": {
+      "previous": "Previous",
+      "next": "Next"
+    },
+    "search": {
+      "search": "Search"
+    }
+  },
+  "sections": {
+    "header": {
+      "menu": "Menu",
+      "cart": "Cart"
+    },
+    "cart": {
+      "title": "Cart",
+      "items_count": {
+        "one": "{{ count }} item",
+        "other": "{{ count }} items"
+      },
+      "cart_error": "There was an error while updating your cart. Please try again.",
+      "cart_quantity_error_html": "You can only add {{ quantity }} of this item to your cart.",
+      "general": {
+        "title": "Cart",
+        "remove": "Remove",
+        "note": "Order special instructions",
+        "subtotal": "Subtotal",
+        "shipping_at_checkout": "Shipping, taxes, and discounts calculated at checkout",
+        "update": "Update",
+        "checkout": "Checkout",
+        "continue_shopping": "Continue shopping",
+        "empty": "Your cart is empty"
+      }
+    }
+  },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable",
+      "value_unavailable": "{{ option_value }} is unavailable",
+      "on_sale": "On sale",
+      "quantity": "Quantity",
+      "vendor": "Vendor"
+    }
+  },
+  "accessibility": {
+    "skip_to_text": "Skip to content",
+    "refresh_page": "Choosing a selection results in a full page refresh.",
+    "link_messages": {
+      "new_window": "Opens in a new window."
+    }
+  }
+}
+

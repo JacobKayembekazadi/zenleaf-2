@@ -1,0 +1,92 @@
+{%- liquid
+  assign product = product | default: all_products[section.settings.product]
+-%}
+
+<section class="py-20">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <div class="grid lg:grid-cols-2 gap-10 items-start">
+      <div>
+        {%- if product.featured_image -%}
+          <div class="aspect-square w-full overflow-hidden rounded-xl shadow-[0_8px_28px_rgba(47,62,52,0.12)] ring-1 ring-black/5 bg-white">
+            <img
+              src="{{ product.featured_image | image_url: width: 1200 }}"
+              alt="{{ product.featured_image.alt | escape }}"
+              class="h-full w-full object-cover"
+              width="{{ product.featured_image.width }}"
+              height="{{ product.featured_image.height }}"
+              loading="eager"
+            >
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div>
+        <h1 class="font-serif text-3xl sm:text-4xl tracking-tight">{{ product.title }}</h1>
+        
+        <div class="mt-4">
+          {%- if product.price_varies -%}
+            <span class="text-2xl font-medium text-[#2F3E34]">
+              {{ product.price_min | money }}–{{ product.price_max | money }}
+            </span>
+          {%- else -%}
+            <span class="text-2xl font-medium text-[#2F3E34]">{{ product.price | money }}</span>
+          {%- endif -%}
+        </div>
+
+        <div class="mt-6 prose text-[#2B2B2B]/80">
+          {{ product.description }}
+        </div>
+
+        {%- form 'product', product, class: 'mt-8' -%}
+          {%- unless product.has_only_default_variant -%}
+            <div class="mb-6">
+              {%- for option in product.options_with_values -%}
+                <label for="Option-{{ forloop.index0 }}" class="block text-sm font-medium mb-2">
+                  {{ option.name }}
+                </label>
+                <select
+                  id="Option-{{ forloop.index0 }}"
+                  name="options[{{ option.name | escape }}]"
+                  class="w-full rounded-md border border-black/10 bg-[#F6F3EE] px-4 py-2 text-base focus:outline-none focus:ring-2 focus:ring-[#9BB7A7]"
+                >
+                  {%- for value in option.values -%}
+                    <option value="{{ value | escape }}" {% if option.selected_value == value %}selected{% endif %}>
+                      {{ value }}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              {%- endfor -%}
+            </div>
+          {%- endunless -%}
+
+          <button
+            type="submit"
+            name="add"
+            class="inline-flex w-full items-center justify-center rounded-md bg-[#2F3E34] px-6 py-3 text-base font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+            {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+          >
+            {%- if product.selected_or_first_available_variant.available -%}
+              Add to Cart
+            {%- else -%}
+              Sold Out
+            {%- endif -%}
+          </button>
+        {%- endform -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Product",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product"
+    }
+  ]
+}
+{% endschema %}
+
