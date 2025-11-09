@@ -74,13 +74,27 @@
         <p class="text-[#2B2B2B]/70">No products found in this collection.</p>
       </div>
     {%- endif -%}
+
+    {%- comment -%} App blocks for collection page {%- endcomment -%}
+    <div class="mt-8">
+      {% for block in section.blocks %}
+        {% render block %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Collection",
-  "settings": []
+  "class": "section",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
 }
 {% endschema %}
 

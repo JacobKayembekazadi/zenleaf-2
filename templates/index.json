@@ -1,8 +1,5 @@
 {
   "sections": {
-    "header": {
-      "type": "header"
-    },
     "hero": {
       "type": "hero"
     },
@@ -23,21 +20,16 @@
     },
     "newsletter": {
       "type": "newsletter"
-    },
-    "footer": {
-      "type": "footer"
     }
   },
   "order": [
-    "header",
     "hero",
     "product_tiers",
     "how_it_works",
     "farm_spotlight",
     "rituals_teaser",
     "reviews",
-    "newsletter",
-    "footer"
+    "newsletter"
   ]
 }
 

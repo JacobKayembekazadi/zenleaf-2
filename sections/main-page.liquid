@@ -16,6 +16,13 @@
     <div class="prose prose-lg max-w-none text-[#2B2B2B]/80">
       {{ page.content }}
     </div>
+
+    {%- comment -%} App blocks for pages {%- endcomment -%}
+    <div class="mt-8">
+      {% for block in section.blocks %}
+        {% render block %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
@@ -72,7 +79,14 @@
 {% schema %}
 {
   "name": "Page",
-  "settings": []
+  "class": "section",
+  "tag": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
 }
 {% endschema %}
 

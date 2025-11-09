@@ -74,6 +74,13 @@
             {%- endif -%}
           </button>
         {%- endform -%}
+
+        {%- comment -%} App blocks for product page {%- endcomment -%}
+        <div class="mt-8">
+          {% for block in section.blocks %}
+            {% render block %}
+          {% endfor %}
+        </div>
       </div>
     </div>
   </div>
@@ -82,11 +89,17 @@
 {% schema %}
 {
   "name": "Product",
+  "class": "section",
   "settings": [
     {
       "type": "product",
       "id": "product",
       "label": "Product"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
     }
   ]
 }

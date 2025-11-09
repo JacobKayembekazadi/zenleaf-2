@@ -84,13 +84,26 @@
         </a>
       </div>
     {%- endif -%}
+
+    {%- comment -%} App blocks for cart page {%- endcomment -%}
+    <div class="mt-8">
+      {% for block in section.blocks %}
+        {% render block %}
+      {% endfor %}
+    </div>
   </div>
 </section>
 
 {% schema %}
 {
   "name": "Cart",
-  "settings": []
+  "class": "section",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "@app"
+    }
+  ]
 }
 {% endschema %}
 
