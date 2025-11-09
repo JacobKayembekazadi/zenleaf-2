@@ -1,0 +1,29 @@
+<section class="py-20">
+  <div class="mx-auto max-w-2xl px-4 sm:px-6 lg:px-8 text-center">
+    <h1 class="font-serif text-4xl sm:text-5xl lg:text-6xl tracking-tight text-[#2B2B2B] mb-6">
+      404
+    </h1>
+    <p class="text-xl text-[#2B2B2B]/70 mb-8">
+      Page not found
+    </p>
+    <p class="text-[#2B2B2B]/70 mb-10">
+      The page you're looking for doesn't exist or has been moved.
+    </p>
+    <div class="flex flex-wrap justify-center gap-3">
+      <a href="{{ routes.root_url }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-6 py-3 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+        Go Home
+      </a>
+      <a href="{{ routes.collections_url }}" class="inline-flex items-center rounded-md border border-[#2F3E34] px-6 py-3 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+        Browse Products
+      </a>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "404",
+  "settings": []
+}
+{% endschema %}
+

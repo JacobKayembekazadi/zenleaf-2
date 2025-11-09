@@ -1,0 +1,96 @@
+<section class="py-20">
+  <div class="mx-auto max-w-4xl px-4 sm:px-6 lg:px-8">
+    <h1 class="font-serif text-3xl sm:text-4xl tracking-tight mb-10">Your Cart</h1>
+
+    {%- if cart.item_count > 0 -%}
+      <form action="{{ routes.cart_url }}" method="post" id="cart">
+        <div class="space-y-6">
+          {%- for item in cart.items -%}
+            <div class="flex gap-6 border-b border-black/10 pb-6">
+              {%- if item.image -%}
+                <div class="flex-shrink-0">
+                  <a href="{{ item.url }}" class="block">
+                    <img
+                      src="{{ item.image | image_url: width: 150 }}"
+                      alt="{{ item.image.alt | escape }}"
+                      class="w-24 h-24 object-cover rounded-lg"
+                      width="{{ item.image.width }}"
+                      height="{{ item.image.height }}"
+                      loading="lazy"
+                    >
+                  </a>
+                </div>
+              {%- endif -%}
+
+              <div class="flex-1">
+                <h3 class="font-medium text-lg">
+                  <a href="{{ item.url }}" class="hover:text-[#2F3E34]">{{ item.product.title }}</a>
+                </h3>
+                {%- unless item.product.has_only_default_variant -%}
+                  <p class="text-sm text-[#2B2B2B]/70 mt-1">{{ item.variant.title }}</p>
+                {%- endunless -%}
+                <p class="text-lg font-medium text-[#2F3E34] mt-2">{{ item.final_line_price | money }}</p>
+              </div>
+
+              <div class="flex flex-col items-end gap-2">
+                <label for="updates_{{ item.key }}" class="sr-only">Quantity</label>
+                <input
+                  type="number"
+                  name="updates[]"
+                  id="updates_{{ item.key }}"
+                  value="{{ item.quantity }}"
+                  min="0"
+                  class="w-20 rounded-md border border-black/10 bg-[#F6F3EE] px-3 py-2 text-center text-base focus:outline-none focus:ring-2 focus:ring-[#9BB7A7]"
+                >
+                <a href="{{ routes.cart_change_url }}?line={{ forloop.index }}&quantity=0" class="text-sm text-[#2B2B2B]/70 hover:text-[#2F3E34]">
+                  Remove
+                </a>
+              </div>
+            </div>
+          {%- endfor -%}
+        </div>
+
+        <div class="mt-10 border-t border-black/10 pt-6">
+          <div class="flex justify-between items-center mb-6">
+            <span class="text-lg font-medium">Subtotal</span>
+            <span class="text-xl font-semibold text-[#2F3E34]">{{ cart.total_price | money }}</span>
+          </div>
+          <p class="text-sm text-[#2B2B2B]/70 mb-6">
+            Taxes and shipping calculated at checkout
+          </p>
+          <div class="flex gap-3">
+            <button
+              type="submit"
+              name="update"
+              class="inline-flex items-center rounded-md border border-[#2F3E34] px-6 py-3 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+            >
+              Update Cart
+            </button>
+            <button
+              type="submit"
+              name="checkout"
+              class="inline-flex items-center rounded-md bg-[#2F3E34] px-6 py-3 text-sm font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+            >
+              Checkout
+            </button>
+          </div>
+        </div>
+      </form>
+    {%- else -%}
+      <div class="text-center py-20">
+        <p class="text-lg text-[#2B2B2B]/70 mb-6">Your cart is empty</p>
+        <a href="{{ routes.collections_url }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-6 py-3 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+          Continue Shopping
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Cart",
+  "settings": []
+}
+{% endschema %}
+
