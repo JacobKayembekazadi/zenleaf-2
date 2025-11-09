@@ -58,7 +58,22 @@
     {% endstyle %}
 
     {{ 'base.css' | asset_url | stylesheet_tag }}
-    {{ 'tailwind.css' | asset_url | stylesheet_tag }}
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              'zen-green': '#9BB7A7',
+              'zen-dark': '#2F3E34',
+              'zen-beige': '#F6F3EE',
+              'zen-tan': '#E9E4D8',
+              'zen-brown': '#C7A27C',
+            },
+          },
+        },
+      }
+    </script>
 
     <script>document.documentElement.className = document.documentElement.className.replace('no-js', 'js');</script>
   </head>
@@ -107,7 +122,7 @@
         unavailable_with_option: `{{ 'products.product.value_unavailable' | t: option_value: '[value]' }}`,
       }
     </script>
-
+    {%- comment -%} Predictive search removed - not implemented {%- endcomment -%}
   </body>
 </html>
 
