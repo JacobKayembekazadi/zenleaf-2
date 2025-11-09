@@ -39,7 +39,7 @@
             {{ link.title }}
           </a>
         {%- endfor -%}
-        <a href="{{ routes.collections_url }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-4 py-2 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+        <a href="{% if template.name == 'index' %}#tiers{% else %}{{ routes.collections_url }}{% endif %}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-4 py-2 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
           Shop The Tranquility Kit
         </a>
         <a href="{{ routes.cart_url }}" class="relative inline-flex items-center p-2 text-[#2B2B2B] hover:text-[#2F3E34] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7] rounded">
@@ -77,7 +77,7 @@
           {{ link.title }}
         </a>
       {%- endfor -%}
-      <a href="{{ routes.collections_url }}" class="inline-flex items-center justify-center rounded-md bg-[#9BB7A7] px-4 py-2 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] mobile-nav-link">
+      <a href="{% if template.name == 'index' %}#tiers{% else %}{{ routes.collections_url }}{% endif %}" class="inline-flex items-center justify-center rounded-md bg-[#9BB7A7] px-4 py-2 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] mobile-nav-link">
         Shop The Tranquility Kit
       </a>
       <a href="{{ routes.cart_url }}" class="inline-flex items-center justify-center rounded-md border border-[#2F3E34] px-4 py-2 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5 mobile-nav-link">

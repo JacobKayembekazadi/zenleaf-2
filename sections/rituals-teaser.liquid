@@ -8,16 +8,12 @@
         {{ section.settings.description | default: "Short, guided practices to anchor your day. Choose Morning Focus, Afternoon Reset, or Evening Unwind and follow along with gentle audio prompts." }}
       </p>
       <div class="mt-6 flex gap-3">
-        {%- if section.settings.primary_link != blank -%}
-          <a href="{{ section.settings.primary_link }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-5 py-2.5 text-sm font-medium text-[#2F3E34] hover:bg-[#8FAD9D]">
-            {{ section.settings.primary_text | default: "Browse rituals" }}
-          </a>
-        {%- endif -%}
-        {%- if section.settings.secondary_link != blank -%}
-          <a href="{{ section.settings.secondary_link }}" class="inline-flex items-center rounded-md border border-[#2F3E34] px-5 py-2.5 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5">
-            {{ section.settings.secondary_text | default: "Play a sample" }}
-          </a>
-        {%- endif -%}
+        <a href="{{ section.settings.primary_link | default: '/pages/rituals' }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-5 py-2.5 text-sm font-medium text-[#2F3E34] hover:bg-[#8FAD9D]">
+          {{ section.settings.primary_text | default: "Browse rituals" }}
+        </a>
+        <a href="{{ section.settings.secondary_link | default: '/pages/rituals' }}" class="inline-flex items-center rounded-md border border-[#2F3E34] px-5 py-2.5 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5">
+          {{ section.settings.secondary_text | default: "Play a sample" }}
+        </a>
       </div>
     </div>
     <div class="order-first lg:order-last">

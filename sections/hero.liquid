@@ -12,14 +12,12 @@
         {{ section.settings.description | default: "Curated small-farm teas, handcrafted accessories, and a pocket mindfulness guide—delivered monthly." }}
       </p>
       <div class="mt-8 flex flex-wrap gap-3">
-        <a href="{{ section.settings.cta_link | default: routes.collections_url }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-6 py-3 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+        <a href="{{ section.settings.cta_link | default: '#tiers' }}" class="inline-flex items-center rounded-md bg-[#9BB7A7] px-6 py-3 text-sm font-medium text-[#2F3E34] shadow-sm hover:bg-[#8FAD9D] focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
           {{ section.settings.cta_text | default: "Shop The Tranquility Kit" }}
         </a>
-        {%- if section.settings.secondary_cta_link != blank -%}
-          <a href="{{ section.settings.secondary_cta_link }}" class="inline-flex items-center rounded-md border border-[#2F3E34] px-6 py-3 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
-            {{ section.settings.secondary_cta_text | default: "Take the 2‑min Quiz" }}
-          </a>
-        {%- endif -%}
+        <a href="{{ section.settings.secondary_cta_link | default: '/pages/quiz' }}" class="inline-flex items-center rounded-md border border-[#2F3E34] px-6 py-3 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5 focus:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-[#9BB7A7]">
+          {{ section.settings.secondary_cta_text | default: "Take the 2‑min Quiz" }}
+        </a>
       </div>
     </div>
     <div class="relative">

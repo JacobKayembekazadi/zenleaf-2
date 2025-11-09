@@ -28,11 +28,9 @@
       <p class="mt-4 text-[#2B2B2B]/80 max-w-xl">
         {{ section.settings.description | default: "We source from independent growers who prioritize soil health, biodiversity, and craft. Each box features traceable origins, tasting notes, and the people behind the leaves." }}
       </p>
-      {%- if section.settings.link != blank -%}
-        <a href="{{ section.settings.link }}" class="mt-6 inline-flex items-center rounded-md border border-[#2F3E34] px-4 py-2 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5">
-          {{ section.settings.link_text | default: "Explore farm stories" }}
-        </a>
-      {%- endif -%}
+      <a href="{{ section.settings.link | default: '/pages/farm-stories' }}" class="mt-6 inline-flex items-center rounded-md border border-[#2F3E34] px-4 py-2 text-sm font-medium text-[#2F3E34] hover:bg-[#2F3E34]/5">
+        {{ section.settings.link_text | default: "Explore farm stories" }}
+      </a>
     </div>
   </div>
 </section>
