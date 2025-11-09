@@ -46,6 +46,7 @@
             {%- if product.variants.size > 0 -%}
               <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-6">
                 <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                <input type="hidden" name="quantity" value="1">
                 <button
                   type="submit"
                   name="add"
@@ -89,6 +90,7 @@
               {%- if tier_product != blank -%}
                 <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-6">
                   <input type="hidden" name="id" value="{{ tier_product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
                   <button
                     type="submit"
                     name="add"

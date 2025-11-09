@@ -45,11 +45,9 @@
         <a href="{{ routes.cart_url }}" class="relative inline-flex items-center p-2 text-[#2B2B2B] hover:text-[#2F3E34] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7] rounded">
           <span class="sr-only">Cart</span>
           {% render 'icon-cart' %}
-          {%- if cart.item_count > 0 -%}
-            <span class="absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#9BB7A7] text-xs font-medium text-[#2F3E34]">
-              {{ cart.item_count }}
-            </span>
-          {%- endif -%}
+          <span class="cart-badge-count absolute -top-1 -right-1 flex h-5 w-5 items-center justify-center rounded-full bg-[#9BB7A7] text-xs font-medium text-[#2F3E34] {% if cart.item_count == 0 %}hidden{% endif %}">
+            {{ cart.item_count }}
+          </span>
         </a>
       </nav>
 
