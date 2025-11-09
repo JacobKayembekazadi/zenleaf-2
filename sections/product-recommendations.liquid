@@ -1,0 +1,132 @@
+{%- comment -%}
+  Shopify automatically provides recommended products via product.recommendations API
+  This section uses native Shopify product recommendations
+{%- endcomment -%}
+
+<section class="py-16 bg-white" data-section-id="{{ section.id }}">
+  <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+    <h2 class="font-serif text-3xl tracking-tight text-center mb-10">
+      {{ section.settings.heading | default: "You may also like" }}
+    </h2>
+
+    <div
+      class="product-recommendations"
+      data-url="{{ routes.product_recommendations_url }}?section_id={{ section.id }}&product_id={{ product.id }}&limit={{ section.settings.products_to_show }}"
+    >
+      {%- if recommendations.performed and recommendations.products_count > 0 -%}
+        <div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-{{ section.settings.products_to_show | at_most: 4 }}">
+          {%- for product in recommendations.products limit: section.settings.products_to_show -%}
+            <article class="group rounded-xl bg-[#F6F3EE] ring-1 ring-black/5 p-4 shadow-[0_2px_12px_rgba(47,62,52,0.08)] hover:shadow-[0_4px_16px_rgba(47,62,52,0.12)] transition-shadow">
+              {%- if product.featured_image -%}
+                <a href="{{ product.url }}" class="block aspect-square overflow-hidden rounded-lg mb-4">
+                  <img
+                    src="{{ product.featured_image | image_url: width: 600 }}"
+                    alt="{{ product.featured_image.alt | escape }}"
+                    class="h-full w-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    width="{{ product.featured_image.width }}"
+                    height="{{ product.featured_image.height }}"
+                    loading="lazy"
+                  >
+                </a>
+              {%- endif -%}
+
+              <h3 class="font-serif text-lg tracking-tight">
+                <a href="{{ product.url }}" class="hover:text-[#2F3E34]">{{ product.title }}</a>
+              </h3>
+
+              <div class="mt-2 flex items-center gap-2">
+                {%- if product.compare_at_price > product.price -%}
+                  <span class="text-[#2F3E34] font-medium">{{ product.price | money }}</span>
+                  <span class="text-[#2B2B2B]/50 line-through text-sm">{{ product.compare_at_price | money }}</span>
+                {%- else -%}
+                  <span class="text-[#2F3E34] font-medium">{{ product.price | money }}</span>
+                {%- endif -%}
+              </div>
+
+              {%- if section.settings.show_quick_add -%}
+                <form action="{{ routes.cart_add_url }}" method="post" enctype="multipart/form-data" class="mt-3">
+                  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}">
+                  <input type="hidden" name="quantity" value="1">
+                  <button
+                    type="submit"
+                    class="w-full inline-flex items-center justify-center rounded-md bg-[#2F3E34] px-4 py-2 text-sm font-medium text-white hover:bg-[#25342B] focus:outline-none focus-visible:ring-2 focus-visible:ring-[#9BB7A7]"
+                    {% unless product.selected_or_first_available_variant.available %}disabled{% endunless %}
+                  >
+                    {%- if product.selected_or_first_available_variant.available -%}
+                      Quick Add
+                    {%- else -%}
+                      Sold Out
+                    {%- endif -%}
+                  </button>
+                </form>
+              {%- endif -%}
+            </article>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  // Fetch product recommendations via AJAX
+  document.addEventListener('DOMContentLoaded', function() {
+    const container = document.querySelector('.product-recommendations');
+    if (!container) return;
+
+    const url = container.dataset.url;
+    if (!url) return;
+
+    fetch(url)
+      .then(response => response.text())
+      .then(html => {
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(html, 'text/html');
+        const recommendations = doc.querySelector('.product-recommendations');
+        
+        if (recommendations && recommendations.innerHTML.trim().length > 0) {
+          container.innerHTML = recommendations.innerHTML;
+        }
+      })
+      .catch(error => {
+        console.error('Error loading recommendations:', error);
+      });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Product Recommendations",
+  "class": "section",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Heading",
+      "default": "You may also like"
+    },
+    {
+      "type": "range",
+      "id": "products_to_show",
+      "min": 2,
+      "max": 8,
+      "step": 1,
+      "label": "Products to show",
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_quick_add",
+      "label": "Show quick add button",
+      "default": true
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Recommendations"
+    }
+  ]
+}
+{% endschema %}
+

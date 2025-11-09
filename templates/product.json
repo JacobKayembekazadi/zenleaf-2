@@ -2,11 +2,93 @@
   "sections": {
     "main": {
       "type": "main-product",
-      "settings": {}
+      "settings": {
+        "enable_sticky_info": true,
+        "enable_video_looping": false,
+        "enable_badges": true,
+        "badge_position": "top-left"
+      },
+      "blocks": [
+        {
+          "type": "title",
+          "settings": {}
+        },
+        {
+          "type": "price",
+          "settings": {}
+        },
+        {
+          "type": "variant_picker",
+          "settings": {
+            "picker_type": "dropdown"
+          }
+        },
+        {
+          "type": "quantity_selector",
+          "settings": {}
+        },
+        {
+          "type": "buy_buttons",
+          "settings": {
+            "show_dynamic_checkout": true
+          }
+        },
+        {
+          "type": "trust_badges",
+          "settings": {
+            "icon_1": "check",
+            "text_1": "Free shipping over $50",
+            "icon_2": "return",
+            "text_2": "30-day returns",
+            "icon_3": "secure",
+            "text_3": "Secure checkout"
+          }
+        },
+        {
+          "type": "description",
+          "settings": {}
+        },
+        {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Ingredients & Benefits",
+            "icon": "leaf",
+            "content": "<p>All natural, sustainably sourced ingredients.</p>"
+          }
+        },
+        {
+          "type": "collapsible_tab",
+          "settings": {
+            "heading": "Brewing Instructions",
+            "icon": "cup",
+            "content": "<p>Steep for 3-5 minutes at 175°F for optimal flavor.</p>"
+          }
+        },
+        {
+          "type": "share",
+          "settings": {}
+        }
+      ]
+    },
+    "product_recommendations": {
+      "type": "product-recommendations",
+      "settings": {
+        "heading": "You may also like",
+        "products_to_show": 4
+      }
+    },
+    "product_rich_text": {
+      "type": "product-rich-text",
+      "disabled": true,
+      "settings": {
+        "heading": "The Story Behind This Tea",
+        "content": "<p>Add your product story here...</p>"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "product_recommendations",
+    "product_rich_text"
   ]
 }
-
